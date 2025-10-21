@@ -77,7 +77,9 @@ Data can be captured using the Intel RealSense viewer and then passed separately
     <img src="images-readme/output.png" alt="Inline Example 3" width="30%"/>
 </p>
 
-**Manual user calibration:**
+Select the sand region, then the extreme points will be automatically extracted.
+
+**Manual Calibration:**
 ```bash
 ./l4project
 ```
@@ -92,15 +94,39 @@ Points can also be specified from the console:
     --points 285,218 488,205 503,358 282,370
 ```
 
-**Loading ExaHyPE Data:**
+
+### Initial Water Heights
+
+The cursor may be used to manipulate the initial water heights that are passed to ExaHyPE.
+
+`0` key used to reset to 0, `U` and `I` for global increase and decrease respectively.
+
+<p align="center">
+    <img src="images-readme/initial_water_heights.png" alt="GUI" width="70%"/>
+</p>
+
+
+
+### Loading ExaHyPE Data
 
 - Use `E` key to load already computed simulation data from ExaHyPE output directory.
 
 - Or use `/` key to trigger the simulation (requires ExaHyPE server on port `4242`) then load the output once done.
 
 <p align="center">
-    <img src="images-readme/p1.png" alt="GUI" width="240"/>
+    <img src="images-readme/p1.png" alt="GUI" width="70%"/>
 </p>
+
+**Note:**  
+Simulation input and output directories must be specified using the `--simulationInput <path>` and `--simulationOutput <path>` command line arguments. These paths should match the directories mapped in the Docker run command for ExaHyPE.  
+Example:
+```bash
+./l4project \
+    --calibrate \
+    --simulationInput ./ExaHyPE/in \
+    --simulationOutput ./ExaHyPE/out
+```
+
 
 
 ## ExaHyPE
