@@ -43,22 +43,18 @@ make
 - **httplib**: HTTP server for remote control (header-only included)
 - **nlohmann/json**: JSON parsing (header-only included)
 
-### Details
+### Verified Build Environment
 Successfully compiled on:
 
 - Apple Clang 17.0.0 (clang-1700.0.13.5) targeting x86_64-apple-darwin24.5 macOS Sequoia 15.5. 
 
 Alterations should be made for Linux & Windows compatibility.
 
-### ExaHyPE
-
-Version included adapted from:
-
-https://github.com/annereinarz/ExaHyPE-Tsunami/tree/main
-
 ## Usage
 
-### With Pre-recorded RealSense Bag File
+### Using a Pre-recorded RealSense Bag File
+
+Data can be captured using the Intel RealSense viewer and then passed separately without a camera necessary:
 
 ```bash
 ./l4project \
@@ -68,7 +64,27 @@ https://github.com/annereinarz/ExaHyPE-Tsunami/tree/main
 
 <!-- --diff './rotated_japan_map_col.png' \ -->
 
-### Example: Manual Point Selection
+### Using Intel RealSense Camera
+
+**Automatic calibration:**
+```bash
+./l4project --calibrate
+```
+
+<p align="center">
+    <img src="images-readme/sand-selection.png" alt="Inline Example 1" width="34%"/>
+    <img src="images-readme/extracted-region.png" alt="Inline Example 2" width="34%"/>
+    <img src="images-readme/output.png" alt="Inline Example 3" width="30%"/>
+</p>
+
+**Manual user calibration:**
+```bash
+./l4project
+```
+Then select corner points in a clockwise pattern starting from the top left.
+
+Points can also be specified from the console:
+
 
 ```bash
 ./l4project \
@@ -76,19 +92,22 @@ https://github.com/annereinarz/ExaHyPE-Tsunami/tree/main
     --points 285,218 488,205 503,358 282,370
 ```
 
-### With Camera
+**Loading ExaHyPE Data:**
 
-**Automatic calibration:**
-```bash
-./l4project --calibrate
-```
+- Use `E` key to load already computed simulation data from ExaHyPE output directory.
 
-**Manual user calibration:**
-```bash
-./l4project
-```
+- Or use `/` key to trigger the simulation (requires ExaHyPE server on port `4242`) then load the output once done.
+
+<p align="center">
+    <img src="images-readme/p1.png" alt="GUI" width="240"/>
+</p>
+
 
 ## ExaHyPE
+
+Version included adapted from:
+
+https://github.com/annereinarz/ExaHyPE-Tsunami/tree/main
 
 - ExaHyPE configured to accept two input files that reside in the `in` directory. These are netCDF files `output.nc` and `water.nc` that contain the sand topography and water heights from the application.
 - Upon simulation completion the `output` directory contains the VTK timestamped files that are automatically read into the application.
